@@ -24,15 +24,27 @@ public class FileUtil {
 
 
 
+    public static String getDecryptNameMD5(String path) {
+        Path path1 = Paths.get(path);
+        String s = path1.getParent().toString(); //文件夹
+        return s+"/"+HashUtil.md5(System.currentTimeMillis()+"");
+    }
+
     public static String getDecryptNameTime(String path) {
         Path path1 = Paths.get(path);
         String s = path1.getParent().toString(); //文件夹
         return s+"/"+System.currentTimeMillis();
     }
 
+
     public static String getDecryptName(String path) {
         int i = path.lastIndexOf(".");
-        return path.substring(0, i)+"-处理后的文件"+path.substring(i, path.length());
+        return path.substring(0, i)+"-已解密"+path.substring(i);
+    }
+
+    public static String getEncryptName(String path) {
+        int i = path.lastIndexOf(".");
+        return path.substring(0, i)+"-已加密"+path.substring(i);
     }
 
 
@@ -92,4 +104,6 @@ public class FileUtil {
         String str = Paths.get(path).getParent().toString();
         return str+"/"+fileName;
     }
+
+
 }
