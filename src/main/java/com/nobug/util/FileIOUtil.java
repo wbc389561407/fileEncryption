@@ -16,6 +16,7 @@ import java.util.List;
  */
 public class FileIOUtil {
 
+
     /**
      * 写出文件
      * @param fileByte 文件字节码
@@ -62,6 +63,14 @@ public class FileIOUtil {
             // 秘钥下标
             int len;
             while ((len = inputStream.read(bytes)) != -1){
+                if(len != indexLen){
+                    byte[] bytes1 = new byte[len];
+                    for (int i = 0; i < len; i++) {
+                        bytes1[i] = bytes[i];
+                    }
+                    fileByte.add(new FileEncUtilBean(bytes1,len));
+                    break;
+                }
                 fileByte.add(new FileEncUtilBean(bytes,len));
                 bytes = new byte[indexLen];
             }
