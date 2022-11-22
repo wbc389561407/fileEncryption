@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="root" layout-manager="GridLayoutManager" row-count="5" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="470" height="400"/>
+      <xy x="20" y="20" width="478" height="400"/>
     </constraints>
     <properties>
       <background color="-11611918"/>
@@ -75,6 +75,8 @@
           <model>
             <item value="txt"/>
             <item value="视频"/>
+            <item value="视频V2"/>
+            <item value="视频V3"/>
             <item value="data"/>
             <item value="wbc"/>
             <item value="mp4"/>

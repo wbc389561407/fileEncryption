@@ -12,6 +12,8 @@ import java.util.regex.Pattern;
  */
 public class FileUtil {
     public static void main(String[] args) {
+//        String decryptNameTime = getDecryptNameTime("C:\\Users\\Administrator\\Desktop\\fileEncryption-v1.0/readme.txt");
+//        System.out.println(decryptNameTime);
 //        String name = "sdad（12";
 //        boolean matches = Pattern.matches(".*（(\\d+)）", name);
 //        System.out.println(matches);
@@ -20,6 +22,13 @@ public class FileUtil {
 
     }
 
+
+
+    public static String getDecryptNameTime(String path) {
+        Path path1 = Paths.get(path);
+        String s = path1.getParent().toString(); //文件夹
+        return s+"/"+System.currentTimeMillis();
+    }
 
     public static String getDecryptName(String path) {
         int i = path.lastIndexOf(".");
@@ -51,8 +60,9 @@ public class FileUtil {
             do{
                 i++;
 
+                int index = fileName.lastIndexOf(".");
                 String[] split = fileName.split("\\.");
-                String name = split[0];
+                String name = fileName.substring(0,index);
 
                 boolean matches = Pattern.matches(".*（(\\d+)）", name);
                 if(matches){
@@ -64,7 +74,7 @@ public class FileUtil {
                 newPath =  parent.toString()+"/"+name;
                 newPath = newPath+"（"+i+"）";
                 if(split.length>1){
-                    newPath = newPath+"."+split[1];
+                    newPath = newPath+"."+fileName.substring(index);
                 }
 
                 file1 = new File(newPath);

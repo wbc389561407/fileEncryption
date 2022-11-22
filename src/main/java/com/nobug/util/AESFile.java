@@ -24,6 +24,49 @@ public class AESFile {
 
     }
 
+    /**
+            V3 加密 原文件名称存入文件 加密文件改为 时间戳
+     *@param path
+     * @param password
+     * @return
+     */
+    public static String encryptV3(String path,String password) {
+        password = getPassword(password);
+        List<FileEncUtilBean> fileEncUtilBeans = FileIOUtil.fileByteReader(path, 1024 * 10);
+        System.out.println("读取成功");
+
+        // 添加一些数据到头部
+        File file = Paths.get(path).toFile();
+        String fileName = file.getName();
+        byte[] headByte = stringToBytes(fileName,1024*10);
+        FileEncUtilBean bean = new FileEncUtilBean(headByte, headByte.length);
+        fileEncUtilBeans.add(0,bean);
+        // 添加一些数据到头部
+
+
+        long l = System.currentTimeMillis();
+
+        for (FileEncUtilBean fileEncUtilBean : fileEncUtilBeans) {
+            byte[] bytes = fileEncUtilBean.getBytes();
+            byte[] encrypt = new byte[0];
+            try {
+                encrypt = AESUtil.encrypt(bytes, password);
+            } catch (Exception e) {
+                throw new RuntimeException("加密失败！");
+            }
+            fileEncUtilBean.setBytes(encrypt);
+            fileEncUtilBean.setLen(encrypt.length);
+        }
+        System.out.println("加密完成："+(System.currentTimeMillis() -l));
+
+        String outPath = FileUtil.getDecryptNameTime(path);
+        FileIOUtil.fileByteWriter(fileEncUtilBeans,outPath);
+        System.out.println("写出成功！");
+
+        return outPath;
+    }
+
+
 
     /**
         V2 加密 原文件名称存入文件
@@ -78,7 +121,7 @@ public class AESFile {
 
 
     /**
-     * V2 解密 回复原文件名称
+     *  V3 V2 解密 回复原文件名称
      * @param path
      * @param password
      * @return
@@ -106,6 +149,7 @@ public class AESFile {
         byte[] bytes = remove.getBytes();
         System.out.println("获取到头部数据：");
         String fileName = new String(bytes, StandardCharsets.UTF_8).trim();
+        System.out.println(fileName);
 
         String outPath = FileUtil.getOutPath(path,fileName);
         outPath = FileUtil.reFileNamePath(outPath);
