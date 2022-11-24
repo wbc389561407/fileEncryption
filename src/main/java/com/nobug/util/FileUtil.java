@@ -1,8 +1,10 @@
 package com.nobug.util;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -12,6 +14,11 @@ import java.util.regex.Pattern;
  */
 public class FileUtil {
     public static void main(String[] args) {
+
+        //输入路径  获取次文件 或者是获取这个文件夹中的文件
+
+        File[] filesList = getFilesList("C:\\Users\\Administrator\\Desktop\\fileEncryption-v1.0/");
+
 //        String decryptNameTime = getDecryptNameTime("C:\\Users\\Administrator\\Desktop\\fileEncryption-v1.0/readme.txt");
 //        System.out.println(decryptNameTime);
 //        String name = "sdad（12";
@@ -22,6 +29,16 @@ public class FileUtil {
 
     }
 
+    public static File[] getFilesList(String path) {
+        File file = new File(path);
+        File[] files = file.listFiles(new FileFilter() {
+            @Override
+            public boolean accept(File pathname) {
+                return pathname.isFile();
+            }
+        });
+        return files;
+    }
 
 
     public static String getDecryptNameMD5(String path) {
