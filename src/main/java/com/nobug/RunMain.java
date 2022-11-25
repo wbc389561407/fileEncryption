@@ -162,6 +162,22 @@ public class RunMain {
                         }).start();
                     }
 
+                    //Video to zybfq  文件名不改，后缀改为专用播放器格式 解密后会恢复原有名字
+                    if ("V2Z".equals(mode)) {
+                        new Thread(() -> {
+                            try {
+                                for (String s : fileList) {
+                                    String encrypt = AESFile.encrypt(s, password, mode, stautsShow);
+                                }
+                            } catch (RuntimeException e1) {
+                                JOptionPane.showMessageDialog(null, e1.getMessage());
+                            }
+
+                            flag = false;
+                            runStateText.setText("未运行");
+                        }).start();
+                    }
+
 
                 } else {
                     JOptionPane.showMessageDialog(null, "程序运行中。。。");
@@ -194,6 +210,12 @@ public class RunMain {
 
                     String password = textField3.getText();
                     String mode = Objects.requireNonNull(comboBox1.getSelectedItem()).toString();
+
+                    if ("V2Z".equals(mode)) {
+                        JOptionPane.showMessageDialog(null, "请使用专用播放器播放");
+                        flag = false;
+                        return;
+                    }
 
                     if ("T2T".equals(mode)) {
                         new Thread(() -> {
@@ -303,6 +325,7 @@ public class RunMain {
         defaultComboBoxModel1.addElement("RT2MM");
         defaultComboBoxModel1.addElement("R2T");
         defaultComboBoxModel1.addElement("R2M");
+        defaultComboBoxModel1.addElement("V2Z");
         comboBox1.setModel(defaultComboBoxModel1);
         comboBox1.setToolTipText("");
         root.add(comboBox1, new GridConstraints(3, 3, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));

@@ -79,6 +79,7 @@
             <item value="RT2MM"/>
             <item value="R2T"/>
             <item value="R2M"/>
+            <item value="V2Z"/>
           </model>
           <toolTipText value=""/>
         </properties>

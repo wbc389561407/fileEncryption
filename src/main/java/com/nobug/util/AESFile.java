@@ -123,6 +123,10 @@ public class AESFile {
             outPath = FileUtil.getDecryptNameMD5(path)+".mp4";
         }
 
+        if("V2Z".equals(mode)){
+            outPath = FileUtil.replaceType(path, "zybfq");
+        }
+
 
         outPath = FileUtil.reFileNamePath(outPath);
         FileIOUtil.fileByteWriter(fileEncUtilBeans,outPath);
