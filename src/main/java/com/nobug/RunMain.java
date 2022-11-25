@@ -257,11 +257,12 @@ public class RunMain {
         frame.setContentPane(new RunMain().root);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
-        int lx = Toolkit.getDefaultToolkit().getScreenSize().width;
+//        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();//获取桌面像素
+//        int WIDTH = dim.width;
+//        int HEIGHT = dim.height;
 
-        int ly = Toolkit.getDefaultToolkit().getScreenSize().height;
-        frame.setLocation(new Point((int) (lx / 2) - 150, (int) (ly / 2) - 150));// 设定窗口出现位置
-        frame.setSize(lx / 4, ly / 4);// 设定窗口大小
+        frame.setSize(640, 360);
+        frame.setLocationRelativeTo(null);//居中显示
         frame.setVisible(true);
 
     }
