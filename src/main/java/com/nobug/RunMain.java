@@ -356,7 +356,7 @@ public class RunMain {
         vs.setText("版本：");
         root.add(vs, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_EAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         vsText = new JLabel();
-        vsText.setText("V4.2");
+        vsText.setText("");
         root.add(vsText, new GridConstraints(0, 4, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         runState = new JLabel();
         runState.setText("状态：");
