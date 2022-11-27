@@ -49,7 +49,7 @@ public class RunMain {
 
 
     public RunMain() {
-        vsText.setText("V4.2");
+        vsText.setText("V4.3");
         new DropTarget(textField1, DnDConstants.ACTION_COPY_OR_MOVE,
                 new DropTargetAdapter() {
                     @Override
