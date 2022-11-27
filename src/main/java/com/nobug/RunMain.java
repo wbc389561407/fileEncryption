@@ -5,11 +5,19 @@ import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.nobug.util.AESFile;
 import com.nobug.util.FileUtil;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DropTarget;
+import java.awt.dnd.DropTargetAdapter;
+import java.awt.dnd.DropTargetDropEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -42,6 +50,38 @@ public class RunMain {
 
     public RunMain() {
         vsText.setText("V4.2");
+        new DropTarget(textField1, DnDConstants.ACTION_COPY_OR_MOVE,
+                new DropTargetAdapter() {
+                    @Override
+                    public void drop(DropTargetDropEvent dtde) {
+                        try {
+                            // 如果拖入的文件格式受支持
+                            if (dtde.isDataFlavorSupported(DataFlavor.javaFileListFlavor)) {
+                                System.out.println("接受");
+//                                // 接收拖拽来的数据
+                                dtde.acceptDrop(DnDConstants.ACTION_COPY_OR_MOVE);
+                                @SuppressWarnings("unchecked")
+                                java.util.List<File> list = (java.util.List<File>) (dtde.getTransferable()
+                                        .getTransferData(DataFlavor.javaFileListFlavor));
+                                //area.append("");
+                                File[] files = new File[1];
+                                files[0] = list.get(0);
+                                System.out.println("添加文件：" + list.get(0).getAbsolutePath());
+                                textField1.setText(list.get(0).getAbsolutePath());
+
+                                // 指示拖拽操作已完成
+                                dtde.dropComplete(true);
+                                System.out.println("拖拽完成");
+                            } else {
+                                // 拒绝拖拽来的数据
+                                dtde.rejectDrop();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                });
 
         fileb.addActionListener(new ActionListener() {
             @Override
