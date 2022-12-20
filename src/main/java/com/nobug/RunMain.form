@@ -38,6 +38,7 @@
         </constraints>
         <properties>
           <font size="18" style="1"/>
+          <text value="将文件或者文件夹拖入此处"/>
         </properties>
       </component>
       <component id="71f17" class="javax.swing.JButton" binding="fileb">

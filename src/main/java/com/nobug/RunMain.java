@@ -4,6 +4,7 @@ import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.nobug.util.AESFile;
 import com.nobug.util.FileUtil;
+import com.nobug.util.PropertiesUtil;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -49,7 +50,7 @@ public class RunMain {
 
 
     public RunMain() {
-        vsText.setText("V4.3");
+        vsText.setText(PropertiesUtil.getValue("vs"));
         new DropTarget(textField1, DnDConstants.ACTION_COPY_OR_MOVE,
                 new DropTargetAdapter() {
                     @Override
@@ -341,6 +342,7 @@ public class RunMain {
         textField1 = new JTextField();
         Font textField1Font = this.$$$getFont$$$(null, Font.BOLD, 18, textField1.getFont());
         if (textField1Font != null) textField1.setFont(textField1Font);
+        textField1.setText("将文件或者文件夹拖入此处");
         root.add(textField1, new GridConstraints(2, 1, 1, 2, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         fileb = new JButton();
         Font filebFont = this.$$$getFont$$$(null, Font.BOLD, 18, fileb.getFont());
